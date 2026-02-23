@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vecchia Casa - Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #3E2A1F;
+            background-color: #FDF8F0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo a {
+            color: #3E2A1F;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            color: #3E2A1F;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease, color 0.3s;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            border-bottom: 2px solid #A9714B;
+            color: #A9714B;
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #3E2A1F;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .btn-primary {
+            background-color: #A9714B;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: #A9714B;
+            color: #A9714B;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin: 40px 0 20px;
+            color: #A9714B;
+            text-align: center;
+        }
+        .page-header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .menu-section {
+            padding: 40px 0;
+        }
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .dish-card {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .dish-card:hover {
+            transform: translateY(-10px);
+        }
+        .dish-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .dish-card h3 {
+            padding: 15px 15px 5px;
+            color: #A9714B;
+            font-size: 1.3rem;
+        }
+        .dish-card p {
+            padding: 0 15px 10px;
+            color: #3E2A1F;
+        }
+        .price {
+            display: block;
+            padding: 0 15px 20px;
+            font-weight: 700;
+            color: #E6B325;
+            font-size: 1.2rem;
+        }
+        footer {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding-top: 40px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+        .footer-social a {
+            color: #3E2A1F;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: #A9714B;
+        }
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(62,42,31,0.2);
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: #E6B325;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-container {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">La vecchia Casa</a>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="about.html">La nostra storia</a></li>
+                    <li><a href="contact.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Il nostro menu</h1>
+                <p>Tradizione e qualità in ogni piatto</p>
+            </div>
+        </section>
+
+        <section class="menu-section">
+            <div class="container">
+                <h2>Antipasti</h2>
+                <div class="dish-grid">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600" alt="Bruschetta">
+                        <h3>Bruschetta al pomodoro</h3>
+                        <p>Pane casereccio, pomodori freschi, aglio, basilico e olio EVO.</p>
+                        <span class="price">€ 8</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1600689512138-9d5c3e8a2c5c?w=600" alt="Prosciutto e melone">
+                        <h3>Prosciutto di Parma e melone</h3>
+                        <p>Prosciutto crudo DOP con melone retato.</p>
+                        <span class="price">€ 12</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1625943553852-781c6dd46faa?w=600" alt="Frittura di calamari">
+                        <h3>Frittura di calamari e gamberi</h3>
+                        <p>Servita con salsa cocktail e limone.</p>
+                        <span class="price">€ 14</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600" alt="Carpaccio di manzo">
+                        <h3>Carpaccio di manzo</h3>
+                        <p>Con rucola, scaglie di grana e riduzione di aceto balsamico.</p>
+                        <span class="price">€ 13</span>
+                    </div>
+                </div>
+
+                <h2>Primi</h2>
+                <div class="dish-grid">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600" alt="Pasta cacio e pepe">
+                        <h3>Spaghetti cacio e pepe</h3>
+                        <p>Pasta fresca, pecorino romano DOP e pepe nero.</p>
+                        <span class="price">€ 14</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1580014317999-e9f1936787a5?w=600" alt="Lasagna">
+                        <h3>Lasagna alla bolognese</h3>
+                        <p>Ragù di carne, besciamella e parmigiano.</p>
+                        <span class="price">€ 15</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc8138?w=600" alt="Risotto">
+                        <h3>Risotto ai funghi porcini</h3>
+                        <p>Riso Carnaroli con funghi porcini freschi.</p>
+                        <span class="price">€ 16</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600" alt="Gnocchi">
+                        <h3>Gnocchi di patate al pesto</h3>
+                        <p>Gnocchi fatti in casa con pesto alla genovese.</p>
+                        <span class="price">€ 13</span>
+                    </div>
+                </div>
+
+                <h2>Secondi</h2>
+                <div class="dish-grid">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=600" alt="Bistecca alla fiorentina">
+                        <h3>Bistecca alla fiorentina</h3>
+                        <p>Taglio di manzo toscano cotto alla griglia (per 2 persone).</p>
+                        <span class="price">€ 45</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600" alt="Pesce spada">
+                        <h3>Pesce spada alla griglia</h3>
+                        <p>Con contorno di verdure grigliate.</p>
+                        <span class="price">€ 22</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1604179807265-8d1f591d3bc7?w=600" alt="Ossobuco">
+                        <h3>Ossobuco con gremolata</h3>
+                        <p>Servito con risotto allo zafferano.</p>
+                        <span class="price">€ 24</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=600" alt="Pollo alla cacciatora">
+                        <h3>Pollo alla cacciatora</h3>
+                        <p>Pollo brasato con olive, pomodoro e rosmarino.</p>
+                        <span class="price">€ 17</span>
+                    </div>
+                </div>
+
+                <h2>Dolci</h2>
+                <div class="dish-grid">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600" alt="Tiramisù">
+                        <h3>Tiramisù classico</h3>
+                        <p>Savoiardi, mascarpone, uova, caffè e cacao.</p>
+                        <span class="price">€ 6</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d671a083?w=600" alt="Panna cotta">
+                        <h3>Panna cotta ai frutti di bosco</h3>
+                        <p>Con salsa di lamponi e mirtilli.</p>
+                        <span class="price">€ 6</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1464305795203-6e1b9c7ccb1b?w=600" alt="Cannoli siciliani">
+                        <h3>Cannoli siciliani</h3>
+                        <p>Guscio fritto ripieno di ricotta e gocce di cioccolato.</p>
+                        <span class="price">€ 5</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600" alt="Torta della nonna">
+                        <h3>Torta della nonna</h3>
+                        <p>Pasta frolla con crema pasticcera e pinoli.</p>
+                        <span class="price">€ 6</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <h3>La vecchia Casa</h3>
+                <p>Via dei Pastini 123, 00186 Roma</p>
+                <p>Tel: +39 06 12345678</p>
+                <p>Email: info@lavecchiacasa.it</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 La vecchia Casa - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

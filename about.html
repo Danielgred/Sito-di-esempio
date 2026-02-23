@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vecchia Casa - La nostra storia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #3E2A1F;
+            background-color: #FDF8F0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo a {
+            color: #3E2A1F;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            color: #3E2A1F;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease, color 0.3s;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            border-bottom: 2px solid #A9714B;
+            color: #A9714B;
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #3E2A1F;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .btn-primary {
+            background-color: #A9714B;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: #A9714B;
+            color: #A9714B;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #A9714B;
+        }
+        .page-header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-story, .timeline-section, .values-section {
+            padding: 80px 0;
+        }
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .story-text h2 {
+            text-align: left;
+        }
+        .story-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #E6B325;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #A9714B;
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .right::after {
+            left: -10px;
+        }
+        .timeline-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .timeline-content h3 {
+            color: #A9714B;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .value-item i {
+            font-size: 3rem;
+            color: #E6B325;
+            margin-bottom: 1rem;
+        }
+        .value-item h3 {
+            color: #A9714B;
+        }
+        footer {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding-top: 40px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+        .footer-social a {
+            color: #3E2A1F;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: #A9714B;
+        }
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(62,42,31,0.2);
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: #E6B325;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .story-content {
+                grid-template-columns: 1fr;
+            }
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item::after {
+                left: 20px;
+            }
+            .right {
+                left: 0;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-container {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">La vecchia Casa</a>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html" class="active">La nostra storia</a></li>
+                    <li><a href="contact.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>La nostra storia</h1>
+                <p>Tre generazioni di passione per la cucina italiana</p>
+            </div>
+        </section>
+
+        <section class="about-story">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <h2>Le origini</h2>
+                        <p>Correva l'anno 1985 quando Giuseppe Rossi, cuoco con una lunga esperienza nelle trattorie toscane, decise di aprire un piccolo locale nel cuore di Roma. La sua idea era semplice: offrire piatti genuini preparati con ingredienti freschi e ricette tramandate dalla sua famiglia. Nacque così "La vecchia Casa", un nome che evocava l'accoglienza calorosa delle case di una volta.</p>
+                        <p>Negli anni, il ristorante è diventato un punto di riferimento per romani e turisti, grazie alla qualità costante e all'atmosfera familiare. Oggi sono i figli Marco e Lucia a portare avanti l'attività, affiancati da una squadra affiatata. La tradizione si unisce a piccole innovazioni, ma l'anima rimane quella di sempre: far sentire ogni ospite come a casa.</p>
+                        <a href="menu.html" class="btn btn-primary">Scopri il nostro menu</a>
+                    </div>
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" alt="Famiglia al ristorante">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="timeline-section">
+            <div class="container">
+                <h2>La nostra evoluzione</h2>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>1985</h3>
+                            <p>Giuseppe apre il ristorante con 5 tavoli in via dei Pastini.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>1995</h3>
+                            <p>Prima espansione: raddoppiamo gli spazi e la capacità.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>2005</h3>
+                            <p>Entra in cucina la seconda generazione: Marco e Lucia.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>2015</h3>
+                            <p>Ristrutturazione completa e nuovo look, mantenendo lo stile tradizionale.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Oggi</h3>
+                            <p>Un punto di riferimento per la cucina romana, con prodotti a km zero e cantina rinnovata.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valori -->
+        <section class="values-section">
+            <div class="container">
+                <h2>I nostri valori</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Freschezza</h3>
+                        <p>Ingredienti selezionati ogni giorno dal mercato.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Passione</h3>
+                        <p>Cuciniamo con amore, come per la nostra famiglia.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-users"></i>
+                        <h3>Ospitalità</h3>
+                        <p>Ogni cliente è un amico da accogliere.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Tradizione</h3>
+                        <p>Ricette che resistono al tempo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galleria storica -->
+        <section class="gallery" style="padding-bottom: 80px;">
+            <div class="container">
+                <h2>Momenti di ieri e oggi</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px;">
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0f?w=600" alt="Vintage" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600" alt="Cucina" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Pranzo" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Tavola" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <h3>La vecchia Casa</h3>
+                <p>Via dei Pastini 123, 00186 Roma</p>
+                <p>Tel: +39 06 12345678</p>
+                <p>Email: info@lavecchiacasa.it</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 La vecchia Casa - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

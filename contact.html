@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vecchia Casa - Prenotazioni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #3E2A1F;
+            background-color: #FDF8F0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo a {
+            color: #3E2A1F;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            color: #3E2A1F;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease, color 0.3s;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            border-bottom: 2px solid #A9714B;
+            color: #A9714B;
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #3E2A1F;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: #A9714B;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: #A9714B;
+            color: #A9714B;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #A9714B;
+            text-align: center;
+        }
+        .page-header {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .contact-form-section, .contact-info-section {
+            padding: 80px 0;
+        }
+        /* Form */
+        .booking-form {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #A9714B;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #E6B325;
+        }
+        /* Selezione piatti con immagini */
+        .dishes-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .dish-option {
+            background-color: #f9f5ed;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #e0d6c5;
+        }
+        .dish-option img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .dish-option input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+            accent-color: #A9714B;
+        }
+        .dish-option label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 400;
+            color: #3E2A1F;
+        }
+        .dish-option span {
+            font-size: 0.9rem;
+            color: #A9714B;
+        }
+        .form-note {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+        /* Mappa */
+        .map-container {
+            width: 100%;
+            height: 300px;
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .info-box i {
+            font-size: 2.5rem;
+            color: #E6B325;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding-top: 40px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+        .footer-social a {
+            color: #3E2A1F;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: #A9714B;
+        }
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(62,42,31,0.2);
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: #E6B325;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-container {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">La vecchia Casa</a>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">La nostra storia</a></li>
+                    <li><a href="contact.html" class="active">Contatti</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Prenota il tuo tavolo</h1>
+                <p>Compila il form e ti ricontatteremo per confermare</p>
+            </div>
+        </section>
+
+        <section class="contact-form-section">
+            <div class="container">
+                <form id="booking-form" class="booking-form" action="https://formspree.io/f/xqapdovr" method="POST">
+                    <!-- Sostituire l'action con il proprio endpoint Formspree -->
+                    <input type="hidden" name="_subject" value="Nuova prenotazione da La vecchia Casa">
+                    <div class="form-group">
+                        <label for="name">Nome e Cognome *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="people">Numero di persone *</label>
+                            <select id="people" name="people" required>
+                                <option value="">Seleziona</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 persone</option>
+                                <option value="3">3 persone</option>
+                                <option value="4">4 persone</option>
+                                <option value="5">5 persone</option>
+                                <option value="6">6 persone</option>
+                                <option value="7">7 persone</option>
+                                <option value="8+">8+ persone</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Data *</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Orario *</label>
+                            <select id="time" name="time" required>
+                                <option value="">Seleziona</option>
+                                <option value="19:00">19:00</option>
+                                <option value="19:30">19:30</option>
+                                <option value="20:00">20:00</option>
+                                <option value="20:30">20:30</option>
+                                <option value="21:00">21:00</option>
+                                <option value="21:30">21:30</option>
+                                <option value="22:00">22:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Scegli i piatti che desideri (puoi selezionarne più di uno)</label>
+                        <div class="dishes-selection">
+                            <!-- Ogni piatto con immagine, nome, descrizione breve -->
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Bruschetta">
+                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=100" alt="Bruschetta">
+                                <label>Bruschetta <span>pomodoro e basilico</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Cacio e pepe">
+                                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=100" alt="Cacio e pepe">
+                                <label>Cacio e pepe <span>pecorino romano</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Pizza Margherita">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100" alt="Pizza">
+                                <label>Pizza Margherita <span>bufala e basilico</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Lasagna">
+                                <img src="https://images.unsplash.com/photo-1580014317999-e9f1936787a5?w=100" alt="Lasagna">
+                                <label>Lasagna <span>alla bolognese</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Saltimbocca">
+                                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc8138?w=100" alt="Saltimbocca">
+                                <label>Saltimbocca <span>vitello e prosciutto</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Tiramisù">
+                                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=100" alt="Tiramisù">
+                                <label>Tiramisù <span>della casa</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Panna cotta">
+                                <img src="https://images.unsplash.com/photo-1587314168485-3236d671a083?w=100" alt="Panna cotta">
+                                <label>Panna cotta <span>frutti di bosco</span></label>
+                            </div>
+                            <div class="dish-option">
+                                <input type="checkbox" name="dish" value="Ossobuco">
+                                <img src="https://images.unsplash.com/photo-1604179807265-8d1f591d3bc7?w=100" alt="Ossobuco">
+                                <label>Ossobuco <span>con gremolata</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Note aggiuntive (allergie, richieste speciali, etc.)</label>
+                        <textarea id="notes" name="notes" rows="4"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Invia richiesta</button>
+                    <p class="form-note">Ti risponderemo entro 24 ore per confermare la disponibilità.</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Mappa e contatti -->
+        <section class="contact-info-section">
+            <div class="container">
+                <h2>Dove trovarci</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.5860774944377!2d12.47638931544148!3d41.90222277921995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6056a6e3c6b5%3A0xf0a5e5a5c5e5a5e5!2sVia%20dei%20Pastini%2C%20Roma!5e0!3m2!1sit!2sit!4v1611234567890!5m2!1sit!2sit" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="contact-info-grid">
+                    <div class="info-box">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Indirizzo</h3>
+                        <p>Via dei Pastini 123, 00186 Roma</p>
+                    </div>
+                    <div class="info-box">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Telefono</h3>
+                        <p>+39 06 12345678</p>
+                    </div>
+                    <div class="info-box">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>info@lavecchiacasa.it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <h3>La vecchia Casa</h3>
+                <p>Via dei Pastini 123, 00186 Roma</p>
+                <p>Tel: +39 06 12345678</p>
+                <p>Email: info@lavecchiacasa.it</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 La vecchia Casa - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // Data minima
+            const dateInput = document.getElementById('date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+
+            // Il form ora invia a Formspree (modificare l'action con il proprio endpoint)
+            // Non serve prevenire default perché l'action è impostata
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vecchia Casa - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #3E2A1F;
+            background-color: #FDF8F0; /* crema caldo */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header e navigazione */
+        header {
+            background-color: #E6B325; /* giallo senape */
+            color: #3E2A1F;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo a {
+            color: #3E2A1F;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            color: #3E2A1F;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease, color 0.3s;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            border-bottom: 2px solid #A9714B; /* marrone caldo */
+            color: #A9714B;
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #3E2A1F;
+        }
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px) brightness(0.7);
+            transform: scale(1.05);
+            z-index: -1;
+        }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: #A9714B;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: #A9714B;
+            color: #A9714B;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .btn-secondary:hover {
+            background-color: #fff;
+            color: #E6B325;
+        }
+        .btn-text {
+            color: #A9714B;
+            padding: 0;
+            border-radius: 0;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+        }
+        .btn-text:hover {
+            border-bottom-color: #A9714B;
+        }
+        /* Sezioni */
+        section {
+            padding: 80px 0;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #A9714B;
+            text-align: center;
+        }
+        .intro p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        /* Griglia piatti */
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .dish-card {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .dish-card:hover {
+            transform: translateY(-10px);
+        }
+        .dish-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .dish-card h3 {
+            padding: 15px 15px 5px;
+            color: #A9714B;
+            font-size: 1.3rem;
+        }
+        .dish-card p {
+            padding: 0 15px 10px;
+            color: #3E2A1F;
+        }
+        .price {
+            display: block;
+            padding: 0 15px 20px;
+            font-weight: 700;
+            color: #E6B325;
+            font-size: 1.2rem;
+        }
+        .center {
+            text-align: center;
+        }
+        /* Sezione valori */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .value-item i {
+            font-size: 3rem;
+            color: #E6B325;
+            margin-bottom: 1rem;
+        }
+        .value-item h3 {
+            color: #A9714B;
+            margin-bottom: 0.5rem;
+        }
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+        /* Footer */
+        footer {
+            background-color: #E6B325;
+            color: #3E2A1F;
+            padding-top: 40px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+        .footer-social a {
+            color: #3E2A1F;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: #A9714B;
+        }
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(62,42,31,0.2);
+            margin-top: 40px;
+        }
+        /* Animazioni */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: #E6B325;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-container {
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .dish-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                display: block;
+                width: 100%;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">La vecchia Casa</a>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">La nostra storia</a></li>
+                    <li><a href="contact.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200');"></div>
+            <div class="hero-content">
+                <h1>La vecchia Casa</h1>
+                <p>Autentica cucina italiana nel cuore di Roma</p>
+                <div class="hero-buttons">
+                    <a href="menu.html" class="btn btn-primary">Scopri il menu</a>
+                    <a href="contact.html" class="btn btn-secondary">Prenota un tavolo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="intro">
+            <div class="container">
+                <h2>Benvenuti da noi</h2>
+                <p>Dal 1985, La vecchia Casa è il luogo dove la tradizione culinaria romana e italiana si incontrano con l'accoglienza di una famiglia. I nostri piatti sono preparati con ingredienti freschi e selezionati, seguendo ricette tramandate di generazione in generazione. Venite a trovarci per un pranzo, una cena o una celebrazione speciale: vi faremo sentire come a casa.</p>
+                <div class="center">
+                    <a href="about.html" class="btn btn-text">Scopri la nostra storia <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Dishes -->
+        <section class="featured">
+            <div class="container">
+                <h2>I piatti del momento</h2>
+                <div class="dish-grid">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600" alt="Pasta cacio e pepe">
+                        <h3>Cacio e pepe</h3>
+                        <p>Pasta fresca con pecorino romano e pepe nero.</p>
+                        <span class="price">€ 14</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600" alt="Pizza margherita">
+                        <h3>Pizza margherita</h3>
+                        <p>Pomodoro, mozzarella di bufala, basilico.</p>
+                        <span class="price">€ 10</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc8138?w=600" alt="Saltimbocca">
+                        <h3>Saltimbocca alla romana</h3>
+                        <p>Fettine di vitello con prosciutto e salvia.</p>
+                        <span class="price">€ 18</span>
+                    </div>
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600" alt="Tiramisù">
+                        <h3>Tiramisù della casa</h3>
+                        <p>Dolce al cucchiaio con mascarpone e caffè.</p>
+                        <span class="price">€ 6</span>
+                    </div>
+                </div>
+                <div class="center">
+                    <a href="menu.html" class="btn btn-primary">Vedi tutto il menu</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valori Section -->
+        <section class="values">
+            <div class="container">
+                <h2>Perché sceglierci</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Ingredienti freschi</h3>
+                        <p>Selezioniamo solo prodotti locali e di stagione.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-home"></i>
+                        <h3>Ambiente familiare</h3>
+                        <p>Un'atmosfera calda e accogliente, come a casa.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-wine-glass-alt"></i>
+                        <h3>Cantina selezionata</h3>
+                        <p>Oltre 200 etichette di vini italiani e regionali.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-heart"></i>
+                        <h3>Passione autentica</h3>
+                        <p>La stessa passione da tre generazioni.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section class="gallery">
+            <div class="container">
+                <h2>Il nostro ristorante</h2>
+                <div class="gallery-grid">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Sala interna">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Tavolo apparecchiato">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Piatto servito">
+                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600" alt="Esterno ristorante">
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Prenota -->
+        <section class="cta" style="background-color: #E6B325; text-align: center; padding: 60px 0;">
+            <div class="container">
+                <h2 style="color: #3E2A1F;">Prenota il tuo tavolo</h2>
+                <p style="margin-bottom: 20px;">Compila il form online e ti contatteremo per confermare</p>
+                <a href="contact.html" class="btn btn-primary" style="background-color: #A9714B;">Vai al form</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <h3>La vecchia Casa</h3>
+                <p>Via dei Pastini 123, 00186 Roma</p>
+                <p>Tel: +39 06 12345678</p>
+                <p>Email: info@lavecchiacasa.it</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 La vecchia Casa - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
